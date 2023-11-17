@@ -1,11 +1,12 @@
 class TodosClient < ApplicationClient
-  BASE_URL = 'http://localhost:3000'
+  BASE_URL = 'http://localhost:3000'.freeze
 
   def todos(**kwargs)
     get '/todos', query: kwargs
   end
 
-  def create_todo(**kwargs)
+  # kwargs enable body of the todo to be passed as: create_todo(status: 'new', description: 'sample todo')
+  def create_todo(**kwargs) 
     post '/todos', body: { todo: kwargs }
   end
 
