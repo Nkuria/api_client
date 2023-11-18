@@ -52,6 +52,8 @@ class ApplicationClient
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = uri.instance_of?(URI::HTTPS)
 
+    # binding.b
+
     request = klass.new(uri.request_uri, default_headers)
 
     if body.present?
@@ -65,9 +67,15 @@ class ApplicationClient
     when 200..299
       JSON.parse(response.body) if response.body.present?
     else
-      raise "Error #{response.code}: #{JSON.parse(response.body)['message']
-      }"
+      # binding.b
+      default_parse_error_response(response)
     end
+  end
+
+  #Override this to handle different error formats
+  def default_parse_error_response(response)
+    raise "Error #{response.code}: #{JSON.parse(response.body)['message']
+      }"
   end
 
   class Error < StandardError; end
