@@ -10,8 +10,8 @@ class ApplicationClientTest < ActiveSupport::TestCase
   end
 
   test 'get' do
-    stub_request(:get, 'https://example.com')
-    @client.send(:get, '/')
+    stub_request(:get, 'https://example.com/todos').to_return(body: "[]")
+    assert_equal [], @client.send(:get, '/todos')
   end
 
   test 'get with query params' do
@@ -44,6 +44,17 @@ class ApplicationClientTest < ActiveSupport::TestCase
       body: '{"foo":{"bar":"barz"}}'
     )
     @client.send(:put, '/todos/1', body: {
+                   foo: {
+                     bar: 'barz'
+                   }
+                 })
+  end
+
+  test 'patch' do
+    stub_request(:patch, 'https://example.com/todos/1').with(
+      body: '{"foo":{"bar":"barz"}}'
+    )
+    @client.send(:patch, '/todos/1', body: {
                    foo: {
                      bar: 'barz'
                    }
