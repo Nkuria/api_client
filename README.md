@@ -1,24 +1,25 @@
-# README
+# Name
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+API CLIENT
 
-Things you may want to cover:
+# Description
 
-* Ruby version
+This is a simple app that demonstartes the functionality of an api client. The api client can be inherited to consume or interact with any api
 
-* System dependencies
+## Configuration
 
-* Configuration
+The is no special configuration required to run the app. You just need to have ruby and rails installed in your system. From there just clone the app and run the migrations
 
-* Database creation
+## Tools / gems used
+- Ruby & Ruby on Rails
+- sqlite3
+- Minitest for tests
+- Webmock to stub / mock api calls
+- Net/http to make the api requests
 
-* Database initialization
 
-* How to run the test suite
+# How it works
+- There is a an ApplicationClient class that contains the abstrction that makes the actual request.
+- You'll just need to run: ``` rails generate api_client sample_client ``` to create a client that inherits from the ApplicationClient. You'll need to replace ``` sample_client ``` with the actual name of the client. The generator will also generate the respective test class
+- You can now interact with any api by calling either ``` get / post / patch / put / delete ``` in your client with the required parameters
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
