@@ -7,6 +7,8 @@ require 'net/http'
 class ApplicationClient
   attr_reader :token
 
+  BASE_URL = 'https://example.com' # tests will require this
+
   def initialize(token)
     @token = token
   end
@@ -72,10 +74,9 @@ class ApplicationClient
     end
   end
 
-  #Override this to handle different error formats
+  # Override this to handle different error formats
   def default_parse_error_response(response)
-    raise "Error #{response.code}: #{JSON.parse(response.body)['message']
-      }"
+    raise Error, response.body
   end
 
   class Error < StandardError; end

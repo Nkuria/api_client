@@ -33,7 +33,7 @@ class FootballClient < ApplicationClient
     get "/competitions/#{code}"
   end
 
-  # sample format of the query: standings(2021, season: 2023, date: "2023-18-11")
+  # sample format of the method call: standings(2021, season: 2023, date: "2023-18-11")
   def standings(id, **kwargs)
     get "/competitions/#{id}/standings", query: kwargs
   end
